@@ -38,15 +38,15 @@ include {Rsem} from './modules/quant/rsem'
 include {Arriba} from './modules/fusion/arriba'
 include {Fusioncatcher} from './modules/fusion/fusioncatcher'
 include {Starfusion} from './modules/fusion/starfusion'
-include {multiqc} from './modules/qc/qc'
-include {Picard_AddReadgroups} from './modules/qc/picard'
-include {Picard_MarkDuplicates} from './modules/qc/picard'
-include {GATK_RNASeq_Trim} from './modules/RNAseq_GATK/GATK'
-include {GATK_RNASeq_RTC_IR} from './modules/RNAseq_GATK/GATK'
-include {GATK_RNASeq_BR_PR} from './modules/RNAseq_GATK/GATK'
-include {Picard_CollectRNAseqmetrics} from './modules/qc/picard'
-include {Picard_CollectAlignmentSummaryMetrics} from './modules/qc/picard'
-include {Mixcr_VCJtools} from './modules/misc/mixcr'
+// include {multiqc} from './modules/qc/qc'
+// include {Picard_AddReadgroups} from './modules/qc/picard'
+// include {Picard_MarkDuplicates} from './modules/qc/picard'
+// include {GATK_RNASeq_Trim} from './modules/RNAseq_GATK/GATK'
+// include {GATK_RNASeq_RTC_IR} from './modules/RNAseq_GATK/GATK'
+// include {GATK_RNASeq_BR_PR} from './modules/RNAseq_GATK/GATK'
+// include {Picard_CollectRNAseqmetrics} from './modules/qc/picard'
+// include {Picard_CollectAlignmentSummaryMetrics} from './modules/qc/picard'
+// include {Mixcr_VCJtools} from './modules/misc/mixcr'
 // working on Genotyping process
 // include {Genotyping} from  './modules/qc/qc'
 
@@ -79,7 +79,7 @@ workflow {
     starfusion_db           = Channel.of(file(params.starfusion_db, checkIfExists:true))
 
 // Mixcr license
-    mixcr_license           = Channel.of(file(params.mixcr_license, checkIfExists:true))
+    // mixcr_license           = Channel.of(file(params.mixcr_license, checkIfExists:true))
 
 // Picard and Genotyping
     // ref_flat                = Channel.of(file(params.ref_flat, checkIfExists:true))
@@ -156,13 +156,13 @@ workflow {
                 return(tuple(id1,id2,id3))
             } \
             .set{merge_fusions_input}
-    merge_fusions_input.all_fusions.view()
+    // merge_fusions_input.all_fusions.view()
 
 // Mixcr
-    Mixcr_VCJtools (
-        Cutadapt.out
-            .combine(mixcr_license)
-    )
+    // Mixcr_VCJtools (
+    //     Cutadapt.out
+    //         .combine(mixcr_license)
+    // )
 
     // multiqc(fastqc.out)
     // Picard_AddReadgroups(star.out)    
