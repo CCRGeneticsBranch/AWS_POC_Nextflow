@@ -137,14 +137,14 @@ workflow {
     )
 
 // 3. Star-Fusion
-    Starfusion_input = Star.out.flatMap{it -> [id: it[0], chimeric_junctions: it[4]]}
+    // Starfusion_input = Star.out.flatMap{it -> [id: it[0], chimeric_junctions: it[4]]}
     Star.out.branch{ id, tbam, bam, bai, chimeric_junctions -> 
                 other: true
                     return( tuple(id, chimeric_junctions))} \
                 .set{Starfusion_input_tmp}
     Starfusion_input = Starfusion_input_tmp.other.combine(starfusion_db)                
     // Starfusion_input.view()
-    // Starfusion(Starfusion_input)
+    Starfusion(Starfusion_input)
 
     Arriba.out
         .combine(Fusioncatcher.out)
