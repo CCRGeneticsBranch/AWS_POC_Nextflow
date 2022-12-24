@@ -146,16 +146,16 @@ workflow {
     // Starfusion_input.view()
     Starfusion(Starfusion_input)
 
-    Arriba.out
-        .combine(Fusioncatcher.out)
-        .combine(Starfusion.out)
-        .branch { id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, id2, fusioncatcher_final_list, fusioncatcher_summary, id3, starfusion_predictions_tsv ->
-            all_fusions: id1 == id2 == id3
-                return( tuple(id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, fusioncatcher_final_list, fusioncatcher_summary, starfusion_predictions_tsv))
-            other: true
-                return(tuple(id1,id2,id3))
-            } \
-            .set{merge_fusions_input}
+    // Arriba.out
+    //     .combine(Fusioncatcher.out)
+    //     .combine(Starfusion.out)
+    //     .branch { id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, id2, fusioncatcher_final_list, fusioncatcher_summary, id3, starfusion_predictions_tsv ->
+    //         all_fusions: id1 == id2 == id3
+    //             return( tuple(id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, fusioncatcher_final_list, fusioncatcher_summary, starfusion_predictions_tsv))
+    //         other: true
+    //             return(tuple(id1,id2,id3))
+    //         } \
+    //         .set{merge_fusions_input}
     // merge_fusions_input.all_fusions.view()
 
 // Mixcr
