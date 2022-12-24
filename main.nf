@@ -137,25 +137,25 @@ workflow {
     )
 
 // 3. Star-Fusion
-// Starfusion_input = Star.out.flatMap{it -> [id: it[0], chimeric_junctions: it[4]]}
-    // Star.out.branch{ id, tbam, bam, bai, chimeric_junctions -> 
-    //             other: true
-    //                 return( tuple(id, chimeric_junctions))} \
-    //             .set{Starfusion_input_tmp}
-    // Starfusion_input = Starfusion_input_tmp.other.combine(starfusion_db)                
+    Starfusion_input = Star.out.flatMap{it -> [id: it[0], chimeric_junctions: it[4]]}
+    Star.out.branch{ id, tbam, bam, bai, chimeric_junctions -> 
+                other: true
+                    return( tuple(id, chimeric_junctions))} \
+                .set{Starfusion_input_tmp}
+    Starfusion_input = Starfusion_input_tmp.other.combine(starfusion_db)                
     // Starfusion_input.view()
     // Starfusion(Starfusion_input)
 
-    // Arriba.out
-    //     .combine(Fusioncatcher.out)
-    //     .combine(Starfusion.out)
-    //     .branch { id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, id2, fusioncatcher_final_list, fusioncatcher_summary, id3, starfusion_predictions_tsv ->
-    //         all_fusions: id1 == id2 == id3
-    //             return( tuple(id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, fusioncatcher_final_list, fusioncatcher_summary, starfusion_predictions_tsv))
-    //         other: true
-    //             return(tuple(id1,id2,id3))
-    //         } \
-    //         .set{merge_fusions_input}
+    Arriba.out
+        .combine(Fusioncatcher.out)
+        .combine(Starfusion.out)
+        .branch { id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, id2, fusioncatcher_final_list, fusioncatcher_summary, id3, starfusion_predictions_tsv ->
+            all_fusions: id1 == id2 == id3
+                return( tuple(id1, arriba_fusions_tsv, arriba_discarded_fusions_tsv, arriba_pdf, fusioncatcher_final_list, fusioncatcher_summary, starfusion_predictions_tsv))
+            other: true
+                return(tuple(id1,id2,id3))
+            } \
+            .set{merge_fusions_input}
     // merge_fusions_input.all_fusions.view()
 
 // Mixcr
