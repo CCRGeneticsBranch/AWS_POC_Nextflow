@@ -42,6 +42,7 @@ process Star {
             --twopassMode Basic \
             --outSAMunmapped Within \
             --outFileNamePrefix "!{dataset_id}." \
+            --chimOutJunctionFormat 1 \
             --chimSegmentMin 12 \
             --chimJunctionOverhangMin 12 \
             --alignSJDBoverhangMin 10 \
@@ -65,6 +66,7 @@ process Star {
             --twopassMode Basic \
             --outSAMunmapped Within \
             --outFileNamePrefix "!{dataset_id}." \
+            --chimOutJunctionFormat 1 \
             --chimSegmentMin 12 \
             --chimJunctionOverhangMin 12 \
             --alignSJDBoverhangMin 10 \
