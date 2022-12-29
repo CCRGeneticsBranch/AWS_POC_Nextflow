@@ -1,7 +1,7 @@
 process Rsem {
         tag { dataset_id }
 
-        publishDir "$params.resultsdir/$dataset_id/RSEM", mode: 'copy'
+        publishDir "${params.resultsdir}/${dataset_id}/RSEM", mode: "${params.publishDirMode}"
 
         input:
 
