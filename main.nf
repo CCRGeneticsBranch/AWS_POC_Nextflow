@@ -159,11 +159,12 @@ workflow {
     merge_fusions_input.all_fusions.view()
 
 // Mixcr
+/*
     Mixcr_VCJtools (
         Cutadapt.out
             .combine(mixcr_license)
     )
-
+*/
     // multiqc(fastqc.out)
     // Picard_AddReadgroups(star.out)    
     // Picard_CollectRNAseqmetrics(
