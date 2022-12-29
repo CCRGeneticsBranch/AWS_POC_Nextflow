@@ -14,15 +14,13 @@ process Star {
     tuple val("${dataset_id}"),
         path("${dataset_id}.Aligned.toTranscriptome.out.bam"),
         path("${dataset_id}.Aligned.sortedByCoord.out.bam"),
-        path("${dataset_id}.Aligned.sortedByCoord.out.bam.bai"),
-        path("${dataset_id}.Chimeric.out.junction")
+        path("${dataset_id}.Aligned.sortedByCoord.out.bam.bai")
 
     stub:
     """
     touch "${dataset_id}.Aligned.toTranscriptome.out.bam"
     touch "${dataset_id}.Aligned.sortedByCoord.out.bam"
     touch "${dataset_id}.Aligned.sortedByCoord.out.bam.bai"
-    touch "${dataset_id}.Chimeric.out.junction"
     """
 
 
@@ -31,8 +29,8 @@ process Star {
     set -exo pipefail
     if [ -d "/lscratch/${SLURM_JOB_ID}" ];then
         TMPDIR="/lscratch/${SLURM_JOB_ID}/!{dataset_id}_STAR"
+    
         if [ -d ${TMPDIR} ];then rm -rf ${TMPDIR};fi
-        
         # run STAR alignment
         STAR --genomeDir !{star_genomeIndex} \
             --readFilesIn !{r1} !{r2} \

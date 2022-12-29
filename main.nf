@@ -37,7 +37,7 @@ include {Star} from './modules/mapping/star'
 include {Rsem} from './modules/quant/rsem'
 include {Arriba} from './modules/fusion/arriba'
 include {Fusioncatcher} from './modules/fusion/fusioncatcher'
-include {Starfusion} from './modules/fusion/starfusion'
+// include {Starfusion} from './modules/fusion/starfusion'
 // include {multiqc} from './modules/qc/qc'
 // include {Picard_AddReadgroups} from './modules/qc/picard'
 // include {Picard_MarkDuplicates} from './modules/qc/picard'
@@ -76,7 +76,7 @@ workflow {
     fusioncatcher_db        = Channel.of(file(params.fusioncatcher_db, checkIfExists:true))
 
 // STARfusion db
-    starfusion_db           = Channel.of(file(params.starfusion_db, checkIfExists:true))
+    // starfusion_db           = Channel.of(file(params.starfusion_db, checkIfExists:true))
 
 // Mixcr license
     // mixcr_license           = Channel.of(file(params.mixcr_license, checkIfExists:true))
